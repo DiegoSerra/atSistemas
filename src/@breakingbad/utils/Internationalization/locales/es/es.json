@@ -1,0 +1,16 @@
+{
+  "loading": "Cargando...",
+  "search": "Buscar",
+  "characters": {
+    "not_found": "No se han encontrado personajes!"
+  },
+  "character": {
+    "information": "Información general",
+    "birthday": "Fecha de nacimiento",
+    "nickname": "Apodo",
+    "category": "Categoría",
+    "portrayed": "Representado pro",
+    "occupation": "Profesión",
+    "appearance": "Apareció en"
+  }
+}
