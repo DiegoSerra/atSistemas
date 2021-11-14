@@ -5,7 +5,7 @@ import themesConfig from '@breakingbad/configs/themesConfig';
 import { createSlice } from '@breakingbad/utils/Context';
 import { merge } from 'lodash';
 import { ThemeConfig, ThemeType } from '@breakingbad/types/Theme.type';
-import { RootState } from '@breakingbad/utils/Context/Context';
+import { RootState } from 'store';
 
 export const initialState: ThemeType = {
   theme: 'defaultDark',

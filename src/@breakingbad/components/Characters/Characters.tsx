@@ -1,11 +1,11 @@
 import { selectCharacters } from "@breakingbad/context/characters";
 import { CharacterType } from "@breakingbad/types/Character.type";
 import { useSelector } from "@breakingbad/utils/Context";
-import { RootState } from "@breakingbad/utils/Context/Context";
 import { t } from "@breakingbad/utils/Internationalization";
 import BreakingBadUtils from "@breakingbad/utils/utils";
 import { Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { RootState } from "store";
 import CharacterItem from "./CharacterItem";
 
 const Characters = () => {

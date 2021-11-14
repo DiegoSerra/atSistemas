@@ -1,7 +1,7 @@
 import { getAllCharacters } from '@breakingbad/services/Character';
 import { CharacterType } from '@breakingbad/types/Character.type';
-import { RootState } from '@breakingbad/utils/Context/Context';
 import { createSlice, createAsyncThunk, createEntityAdapter, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'store';
 
 export const getCharacters = createAsyncThunk('characters/getCharacters', async (): Promise<CharacterType[]> => await getAllCharacters());
 

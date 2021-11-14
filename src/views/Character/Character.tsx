@@ -1,12 +1,12 @@
 import Loading from "@breakingbad/components/Loading";
 import { CharacterContext, getCharacter, getRandomQuote } from "@breakingbad/context/character";
 import { useDispatch, useSelector } from "@breakingbad/utils/Context";
-import { RootState } from "@breakingbad/utils/Context/Context";
 import { t } from "@breakingbad/utils/Internationalization";
 import { AppBar, Card, CardContent, CardMedia, Icon, IconButton, Paper, Toolbar, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { RootState } from "store";
 
 export default function Character() {
   const dispatch = useDispatch();
@@ -29,14 +29,14 @@ export default function Character() {
 	}
 
   return (
-    <div className="flex py-24">
+    <div className="flex flex-wrap py-24">
       <div className="w-full md:w-1/2 md:p-16">
         <div className="flex-auto flex-wrap content-center justify-center align-center">
-          <IconButton to="/" component={Link} className="mb-20 mr-8">
+          <IconButton to="/" component={Link} className="mb-8 sm:mb-20 mr-8">
             <Icon>arrow_back</Icon>
           </IconButton>
 
-          <Typography gutterBottom variant="h2" component="span">
+          <Typography className="text-28 sm:text-56" gutterBottom variant="h2" component="span">
             {character.name}
           </Typography>
         </div>

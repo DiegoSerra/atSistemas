@@ -9,8 +9,12 @@
     "birthday": "Fecha de nacimiento",
     "nickname": "Apodo",
     "category": "Categoría",
-    "portrayed": "Representado pro",
+    "portrayed": "Representado por",
     "occupation": "Profesión",
     "appearance": "Apareció en"
+  },
+  "languages": {
+    "es": "Español",
+    "en": "Inglés"
   }
 }

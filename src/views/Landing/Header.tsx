@@ -31,12 +31,12 @@ const Header = () => {
           elevation={5}
           variant='elevation'
           ref={searchRef}
-          className="flex items-center w-full max-w-400 px-8 py-4 rounded-16 z-50 shadow"
+          className="flex items-center w-full max-w-512 px-8 py-4 rounded-16 z-50 shadow"
         >
           <Icon color="action">search</Icon>
 
           <Input
-            placeholder="Search"
+            placeholder={t('search')}
             className="flex flex-1 mx-8"
             disableUnderline
             fullWidth
