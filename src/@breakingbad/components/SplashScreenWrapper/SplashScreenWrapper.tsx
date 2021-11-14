@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export default function SplashScreenWrapper({ children }: Props): JSX.Element {
+const SplashScreenWrapper = ({ children }: Props) => {
 	const { loadingI18n } = useSelector((state: RootState) => state.language);
 
   return (
@@ -15,3 +15,5 @@ export default function SplashScreenWrapper({ children }: Props): JSX.Element {
     </>
   );
 }
+
+export default (SplashScreenWrapper);

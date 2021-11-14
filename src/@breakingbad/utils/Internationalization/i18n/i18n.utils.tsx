@@ -18,8 +18,4 @@ export enum Languages {
   default = 'en',
 }
 
-export const languageFromStorage = localStorage.getItem('i18nextLng');
-
-export function getLocalI18n() {
-  return languageFromStorage ? resources[languageFromStorage].translation : resources[Languages.default].translation;
-}
+export const languageFromStorage = localStorage.getItem('i18nextLng') as Languages;

@@ -1,6 +1,7 @@
 import { Container } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { memo, Suspense } from 'react';
+import Footer from '../Footer';
 import Loading from '../Loading';
 import Router from '../Router';
 
@@ -63,11 +64,12 @@ const BreakingBadLayout = () => {
 	const classes = useStyles();
 
 	return (
-		<Container classes={classes}>
-			<Suspense fallback={<Loading />}>
+		<Suspense fallback={<Loading />}>
+			<Container classes={classes} className="pb-60">
 				<Router />
-			</Suspense>
-		</Container>
+			</Container>
+			<Footer />
+		</Suspense>
 	);
 }
 
