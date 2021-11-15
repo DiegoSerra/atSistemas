@@ -24,8 +24,14 @@ const characterSlice = createSlice({
 			.addCase(getCharacter.fulfilled, (state: CharacterContext, action: PayloadAction<CharacterType>) => {
 				state.value = action.payload;
 			})
+			.addCase(getCharacter.rejected, (state: CharacterContext) => {
+				state.value = null;
+			})
 			.addCase(getRandomQuote.fulfilled, (state: CharacterContext, action: PayloadAction<QuoteType | undefined>) => {
 				state.quote = action.payload;
+			})
+			.addCase(getRandomQuote.rejected, (state: CharacterContext) => {
+				state.quote = undefined;
 			})
   },
 });

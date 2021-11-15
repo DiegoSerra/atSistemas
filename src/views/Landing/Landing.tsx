@@ -10,7 +10,7 @@ export default function Landing() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getCharacters()).then(() => setLoading(false));
+    dispatch(getCharacters()).finally(() => setLoading(false));
   }, [dispatch]);
 
   if (loading) {
