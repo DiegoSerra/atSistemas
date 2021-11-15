@@ -16,5 +16,9 @@
   "languages": {
     "es": "Spanish",
     "en": "English"
+  },
+  "error": {
+    "400": "Petición mala",
+    "500": "Error interno del servidor"
   }
 }

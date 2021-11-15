@@ -27,7 +27,9 @@ const charactersSlice = createSlice({
 		}
 	},
 	extraReducers: (builder) => {
-    builder.addCase(getCharacters.fulfilled, charactersAdapter.setAll)
+    builder
+			.addCase(getCharacters.fulfilled, charactersAdapter.setAll)
+			.addCase(getCharacters.rejected, charactersAdapter.removeAll)
   },
 });
 

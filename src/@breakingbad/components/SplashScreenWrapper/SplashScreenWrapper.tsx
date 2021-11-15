@@ -16,4 +16,4 @@ const SplashScreenWrapper = ({ children }: Props) => {
   );
 }
 
-export default (SplashScreenWrapper);
+export default SplashScreenWrapper;

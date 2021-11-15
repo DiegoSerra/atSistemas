@@ -30,10 +30,10 @@ function patch<T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: 
 function _delete<T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig): Promise<R> {
   return instance.delete(url, config);
 }
-function requestInterceptor(onFulfilled?: any, onRejected?: (error: any) => any): number {
+function requestInterceptor(onFulfilled?: ((value: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>) | undefined, onRejected?: (error: any) => any): number {
   return instance.interceptors.request.use(onFulfilled, onRejected);
 }
-function responseInterceptor(onFulfilled?: any, onRejected?: (error: any) => any): number {
+function responseInterceptor(onFulfilled?: ((value: AxiosResponse<any>) => AxiosResponse<any> | Promise<AxiosResponse<any>>) | undefined, onRejected?: (error: any) => any): number {
   return instance.interceptors.response.use(onFulfilled, onRejected);
 }
 export const Http = { create, setDefaultHeader, clearDefaultHeader, request, get, post, put, patch, delete: _delete, requestInterceptor, responseInterceptor, CancelToken: axios.CancelToken };

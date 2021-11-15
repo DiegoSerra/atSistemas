@@ -20,7 +20,7 @@ export default function Character() {
     dispatch(getCharacter(+id))
       .unwrap()
       .then((response) => dispatch(getRandomQuote(response.name)))
-      .then(() => setLoading(false))
+      .finally(() => setLoading(false))
       .catch(() => history.replace('/not-found'))
   }, [dispatch, history, id]);
 

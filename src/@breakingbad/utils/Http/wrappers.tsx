@@ -1,28 +1,42 @@
 import { Http } from '@breakingbad/services/Http';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { OptionsObject, SnackbarKey, SnackbarMessage } from 'notistack';
+import { t } from '../Internationalization';
 
-export const injectTokenHeader = (accessToken: string) => {
-  Http.setDefaultHeader('Authorization', `Bearer ${accessToken}`);
+const snackbarOptions: OptionsObject = {
+  variant: 'error',
+  anchorOrigin: {
+    vertical: 'top',
+    horizontal: 'right',
+  },
+  autoHideDuration: 5000,
+  preventDuplicate: true
 }
 
-export const removeTokenHeader = () => {
-  Http.clearDefaultHeader('Authorization');
-}
-
-export const injectExpiredTokenInterceptor = () => {
+export const injectInterceptor = (enqueueSnackbar: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey) => {
   Http.responseInterceptor(
-    (res: any) => res,
+    (res: AxiosResponse<any>) => res,
     async (err: any) => {
+      
       if (axios.isCancel(err)) {
+        console.log('cancel', err)
         return Promise.reject()
       };
+
       try {
         switch (err.response.status) {
+          case (400):
+          case (500):
+            enqueueSnackbar(t(`error.${err.response.status}`), snackbarOptions);
+            return Promise.reject(err);
           default:
             break;
         }
-      } catch (e) {}
+      } catch (e) {
+        enqueueSnackbar(t(`error.400`), snackbarOptions);
+      }
     }
   );
 
 }
+

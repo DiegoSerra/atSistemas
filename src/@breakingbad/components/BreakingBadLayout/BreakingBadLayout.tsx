@@ -1,6 +1,10 @@
+import { useSelector } from '@breakingbad/utils/Context';
+import { injectInterceptor } from '@breakingbad/utils/Http';
 import { Container } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { memo, Suspense } from 'react';
+import { useSnackbar } from 'notistack';
+import { memo, Suspense, useEffect } from 'react';
+import { RootState } from 'store';
 import Footer from '../Footer';
 import Loading from '../Loading';
 import Router from '../Router';
@@ -62,6 +66,15 @@ const useStyles = makeStyles(theme => ({
 
 const BreakingBadLayout = () => {
 	const classes = useStyles();
+	const { loadingI18n } = useSelector((state: RootState) => state.language);
+	const { enqueueSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    //i18n must be loaded before the user's dynamic routes, as these have keys to the i18n object
+    if (!loadingI18n) {
+      injectInterceptor(enqueueSnackbar);
+    }
+  }, [enqueueSnackbar, loadingI18n]);
 
 	return (
 		<Suspense fallback={<Loading />}>

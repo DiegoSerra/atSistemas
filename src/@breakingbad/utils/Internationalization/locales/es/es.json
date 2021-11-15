@@ -16,5 +16,9 @@
   "languages": {
     "es": "Español",
     "en": "Inglés"
+  },
+  "error": {
+    "400": "Bad Request",
+    "500": "Internal server error"
   }
 }
