@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "@breakingbad/utils/Context";
 import { t } from "@breakingbad/utils/Internationalization";
 import { AppBar, Card, CardContent, CardMedia, Icon, IconButton, Paper, Toolbar, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { RootState } from "store";
 
 export default function Character() {
@@ -13,7 +12,7 @@ export default function Character() {
   const history = useHistory();
   const { value: character, quote } = useSelector<RootState>(({ character }) => character) as CharacterContext;
   const [loading, setLoading] = useState(true);
-
+  
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
