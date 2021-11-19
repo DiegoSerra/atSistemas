@@ -1,5 +1,6 @@
 import { Http } from "@breakingbad/services/Http";
 import { CharacterType } from "@breakingbad/types/Character.type";
+import { DeathType } from "@breakingbad/types/Death.type";
 import { QuoteType } from "@breakingbad/types/Quote.type";
 
 export async function getAllCharacters(): Promise<CharacterType[]> {
@@ -19,6 +20,16 @@ export async function getCharacterById(id: number): Promise<CharacterType> {
 
 export async function getRandomQuoteByAuthor(name: string): Promise<QuoteType | undefined> {
   const result = await Http.get(`/quote/random?author=${name}`);
+  
+  if (!result?.data?.length) {
+    return;
+  }
+
+  return result?.data[0];
+}
+
+export async function getDeathByAuthor(name: string): Promise<DeathType | undefined> {
+  const result = await Http.get(`/death?name=${name}`);
   
   if (!result?.data?.length) {
     return;

@@ -30,7 +30,6 @@ describe('Character Component', () => {
   let store: any;
   let component: any;
 
-
   beforeEach(() => {
     React.useState = jest.fn().mockReturnValue([false, {}])
 

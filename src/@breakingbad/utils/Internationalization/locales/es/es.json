@@ -11,7 +11,15 @@
     "category": "Categoría",
     "portrayed": "Representado por",
     "occupation": "Profesión",
-    "appearance": "Apareció en"
+    "appearance": "Apareció en",
+    "show_spoiler": "Ver spoiler",
+    "hide_spoiler": "Ocultar spoiler",
+    "status": "Estado",
+    "cause": "Causa",
+    "responsible": "Responsable",
+    "season": "Temporada",
+    "episode": "Episodio",
+    "alive": "Este personaje sigue vivo!"
   },
   "languages": {
     "es": "Español",

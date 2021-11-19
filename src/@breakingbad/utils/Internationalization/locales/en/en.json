@@ -11,7 +11,15 @@
     "category": "Category",
     "portrayed": "Portrayed",
     "occupation": "Occupation",
-    "appearance": "Appeared in"
+    "appearance": "Appeared in",
+    "show_spoiler": "Show spoiler",
+    "hide_spoiler": "Hide spoiler",
+    "status": "Status",
+    "cause": "Cause",
+    "responsible": "Responsible",
+    "season": "Season",
+    "episode": "Episode",
+    "alive": "This character is still alive!"
   },
   "languages": {
     "es": "Spanish",
