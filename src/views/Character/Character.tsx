@@ -1,8 +1,10 @@
+import CardSection from "@breakingbad/components/CardSection";
 import Loading from "@breakingbad/components/Loading";
-import { CharacterContext, getCharacter, getRandomQuote } from "@breakingbad/context/character";
+import { CharacterContext, getCharacter, getDeath, getRandomQuote, resetCharacter } from "@breakingbad/context/character";
 import { useDispatch, useSelector } from "@breakingbad/utils/Context";
 import { t } from "@breakingbad/utils/Internationalization";
-import { AppBar, Card, CardContent, CardMedia, Icon, IconButton, Paper, Toolbar, Typography } from "@material-ui/core";
+import { getStatusIcon } from "@breakingbad/utils/utils";
+import { Card, CardMedia, Icon, IconButton, Paper, Typography, Link as ButtonLink, Tooltip, LinearProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { RootState } from "store";
@@ -10,10 +12,37 @@ import { RootState } from "store";
 export default function Character() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { value: character, quote } = useSelector<RootState>(({ character }) => character) as CharacterContext;
+  const { value: character, quote, death } = useSelector<RootState>(({ character }) => character) as CharacterContext;
   const [loading, setLoading] = useState(true);
+  const [showSpoiler, setShowSpoiler] = useState(false);
+  const [spoilerLoading, setSpoilerLoading] = useState(false);
   
   const { id } = useParams<{ id: string }>();
+
+  const occupationJSX = (occupation: string[]) => {
+    return (
+      <>
+      {occupation.map(occupation => (
+        <div className="flex items-center" key={occupation}>
+          <Typography>{occupation}</Typography>
+          <Icon className="text-16 mx-4" color="action">
+            business_center
+          </Icon>
+        </div>
+      ))}
+      </>
+    )
+  }
+
+  const handleShowSpoiler = async (author: string) => {
+    if (!death) {
+      setSpoilerLoading(true);
+      await dispatch(getDeath(author));
+      setSpoilerLoading(false);
+    }
+
+    setShowSpoiler(true);
+  };
 
   useEffect(() => {
     dispatch(getCharacter(+id))
@@ -21,6 +50,11 @@ export default function Character() {
       .then((response) => dispatch(getRandomQuote(response.name)))
       .finally(() => setLoading(false))
       .catch(() => history.replace('/not-found'))
+    
+    return () => {
+      dispatch(resetCharacter());
+      setShowSpoiler(false);
+    }
   }, [dispatch, history, id]);
 
   if (loading || !character) {
@@ -52,56 +86,19 @@ export default function Character() {
           </Typography>
         </Paper>}
 
-        <Card className="w-full my-32 rounded-16 shadow text-left">
-          <AppBar position="static" elevation={0}>
-            <Toolbar className="px-8">
-              <Typography variant="subtitle1" color="inherit" className="flex-1 px-12 font-medium">
-              {t('character.information')}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-
-          <CardContent>
-            <div className="mb-24">
-              <Typography className="font-semibold mb-4 text-15">{t('character.birthday')}</Typography>
-              <Typography>{character.birthday}</Typography>
-            </div>
-
-            <div className="mb-24">
-              <Typography className="font-semibold mb-4 text-15">{t('character.nickname')}</Typography>
-              <Typography>{character.nickname}</Typography>
-            </div>
-
-            <div className="mb-24">
-              <Typography className="font-semibold mb-4 text-15">{t('character.category')}</Typography>
-              <Typography>{character.category}</Typography>
-            </div>
-
-            <div className="mb-24">
-              <Typography className="font-semibold mb-4 text-15">{t('character.portrayed')}</Typography>
-              <Typography>{character.portrayed}</Typography>
-            </div>
-
-            <div className="mb-24">
-              <Typography className="font-semibold mb-4 text-15">{t('character.occupation')}</Typography>
-
-              {character.occupation.map(occupation => (
-                <div className="flex items-center" key={occupation}>
-                  <Typography>{occupation}</Typography>
-                  <Icon className="text-16 mx-4" color="action">
-                  business_center
-                  </Icon>
-                </div>
-              ))}
-            </div>
-
-            <div className="mb-24">
-              <Typography className="font-semibold mb-4 text-15">{t('character.appearance')}</Typography>
-              <Typography>{character.appearance.join(', ')}</Typography>
-            </div>
-          </CardContent>
-        </Card>
+        <CardSection
+          title={t('character.information')}
+          data={[
+            { label: t('character.birthday'), value: character.birthday },
+            { label: t('character.nickname'), value: character.nickname },
+            { label: t('character.category'), value: character.category },
+            { label: t('character.portrayed'), value: character.portrayed },
+            { label: t('character.occupation'), component: occupationJSX(character.occupation) },
+            { label: t('character.appearance'), value: character.appearance.join(', ') },
+          ]}
+        />
       </div>
+
       <div className="w-full md:w-1/2 md:p-16">
         <Card className="flex flex-col shadow">
           <CardMedia
@@ -109,7 +106,60 @@ export default function Character() {
             image={character.img}
             alt={character.name}
           />
+          {spoilerLoading && <LinearProgress className="w-full rounded-2" color="secondary" />}
         </Card>
+
+        {!showSpoiler && <ButtonLink
+          component="button"
+          variant="body2"
+          onClick={() => handleShowSpoiler(character.name)}
+        >
+          {t('character.show_spoiler')}
+        </ButtonLink>}
+
+        {showSpoiler && <ButtonLink
+          component="button"
+          variant="body2"
+          onClick={() => setShowSpoiler(false)}
+        >
+          {t('character.hide_spoiler')}
+        </ButtonLink>}
+
+        {showSpoiler && (death ? 
+          <CardSection
+            data={[
+              { 
+                label: t('character.status'), 
+                component: <div className="flex items-center">
+                  <Typography>{character.status}</Typography>
+                  <Tooltip title={character.status}>
+                    <Icon className="text-16 mx-4" color="action">
+                      {getStatusIcon(character.status)}
+                    </Icon>
+                  </Tooltip>
+                </div> 
+              },
+              { label: t('character.cause'), value: death.cause },
+              { label: t('character.responsible'), value: death.responsible },
+              { label: t('character.season'), value: death.season },
+              { label: t('character.episode'), value: death.episode },
+            ]}
+          >
+            <Typography variant="h5" color="inherit" className="flex-1 py-12 font-medium italic text-center">
+              {death.last_words}
+            </Typography>
+          </CardSection> :
+          <Paper elevation={3} className="py-20 px-32 shadow text-left">
+            <Typography variant="h5" color="inherit" className="flex-1 py-12 font-medium italic text-center">
+              {t('character.alive')}
+              <Tooltip title={character.status}>
+                <Icon className="text-16 mx-4" color="action">
+                  {getStatusIcon(character.status)}
+                </Icon>
+              </Tooltip>
+            </Typography>
+          </Paper>
+        )}  
       </div>
     </div>
   );

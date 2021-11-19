@@ -41,7 +41,7 @@ const Footer = () => {
               <IconButton
                 className="w-48 h-48 px-4"
                 component="a"
-                href="https://github.com/DiegoSerra"
+                href="https://github.com/DiegoSerra/atSistemas"
                 target="_blank"
                 rel="noreferrer noopener"
                 role="button"
