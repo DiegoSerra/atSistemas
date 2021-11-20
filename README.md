@@ -2,7 +2,7 @@
 
 This project consists of an application with which you can consult the details of the characters of the series Breaking Bad using the api [breakingbadapi.com](https://www.breakingbadapi.com/).
 
-![Landing page](./public/assets/images/demo/landing.png)
+![Landing page](./public/assets/images/demo/characters.png)
 
 For a full demo this application is hosted by [https://nervous-fermat-3644a3.netlify.app](https://nervous-fermat-3644a3.netlify.app/) using [Netlify platform](https://www.netlify.com/)
 
