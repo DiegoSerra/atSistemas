@@ -65,7 +65,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `npm test:coverage`
 
-Launches the test runner and generate a coverage report in [coverage folder](coverage\index.html).
+Launches the test runner and generate a coverage report in [coverage folder](coverage/index.html).
 
 ### `npm run build`
 
@@ -220,7 +220,11 @@ export const changeLanguage = (lng: Languages) => {
 # Testing
 
 Using [jest](https://jestjs.io/), 4 tests of the different parts of the application have been included to show possible examples of how the tests of different parts of the project could be carried out..
-- [App.spec.tsx](src\App.spec.tsx) - Main component and in charge of rendering the loading while the application loads the routes.
-- [Character.spec.tsx](src\views\Character\Character.spec.tsx) - Component rendering the detail view of a character
-- [character.spec.tsx](src\@breakingbad\services\Character\character.spec.tsx) - Service responsible for http calls to the /characters api
-- [charactersSlice.spec.tsx](src\@breakingbad\context\characters\charactersSlice.spec.tsx) - Slice responsible for managing characters state
+- [App.spec.tsx](src/App.spec.tsx) - Main component and in charge of rendering the loading while the application loads the routes.
+- [Character.spec.tsx](src/views/Character/Character.spec.tsx) - Component rendering the detail view of a character
+- [character.spec.tsx](src/@breakingbad/services/Character/character.spec.tsx) - Service responsible for http calls to the /characters api
+- [charactersSlice.spec.tsx](src/@breakingbad/context/characters/charactersSlice.spec.tsx) - Slice responsible for managing characters state
+
+# Things to consider
+
+This application takes into account that the number of characters returned by the breaking bad api is not high, so it has not been considered necessary to implement lazy loading, client virtualisation or infinite scroll.

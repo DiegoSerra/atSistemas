@@ -5,12 +5,11 @@ import { t } from "@breakingbad/utils/Internationalization";
 import BreakingBadUtils from "@breakingbad/utils/utils";
 import { Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { RootState } from "store";
 import CharacterItem from "./CharacterItem";
 
 const Characters = () => {
   const characters = useSelector(selectCharacters);
-  const searchText = useSelector<RootState>(({ characters }) => characters.searchText) as string;
+  const searchText = useSelector(({ characters }) => characters.searchText);
   const [data, setData] = useState(characters);
 
   useEffect(() => {

@@ -1,18 +1,17 @@
 import CardSection from "@breakingbad/components/CardSection";
 import Loading from "@breakingbad/components/Loading";
-import { CharacterContext, getCharacter, getDeath, getRandomQuote, resetCharacter } from "@breakingbad/context/character";
+import { getCharacter, getDeath, getRandomQuote, resetCharacter } from "@breakingbad/context/character";
 import { useDispatch, useSelector } from "@breakingbad/utils/Context";
 import { t } from "@breakingbad/utils/Internationalization";
 import { getStatusIcon } from "@breakingbad/utils/utils";
 import { Card, CardMedia, Icon, IconButton, Paper, Typography, Link as ButtonLink, Tooltip, LinearProgress, Divider } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { RootState } from "store";
 
 export default function Character() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { value: character, quote, death } = useSelector<RootState>(({ character }) => character) as CharacterContext;
+  const { value: character, quote, death } = useSelector(({ character }) => character);
   const [loading, setLoading] = useState(true);
   const [showSpoiler, setShowSpoiler] = useState(false);
   const [spoilerLoading, setSpoilerLoading] = useState(false);
