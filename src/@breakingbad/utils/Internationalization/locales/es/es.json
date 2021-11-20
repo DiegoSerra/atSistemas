@@ -12,6 +12,7 @@
     "portrayed": "Representado por",
     "occupation": "Profesión",
     "appearance": "Apareció en",
+    "appears_in": "Temporadas {{appearance}}",
     "show_spoiler": "Ver spoiler",
     "hide_spoiler": "Ocultar spoiler",
     "status": "Estado",
@@ -19,6 +20,7 @@
     "responsible": "Responsable",
     "season": "Temporada",
     "episode": "Episodio",
+    "last_words": "Últimas palabras",
     "alive": "Este personaje sigue vivo!"
   },
   "languages": {
