@@ -4,7 +4,7 @@ import { CharacterContext, getCharacter, getDeath, getRandomQuote, resetCharacte
 import { useDispatch, useSelector } from "@breakingbad/utils/Context";
 import { t } from "@breakingbad/utils/Internationalization";
 import { getStatusIcon } from "@breakingbad/utils/utils";
-import { Card, CardMedia, Icon, IconButton, Paper, Typography, Link as ButtonLink, Tooltip, LinearProgress } from "@material-ui/core";
+import { Card, CardMedia, Icon, IconButton, Paper, Typography, Link as ButtonLink, Tooltip, LinearProgress, Divider } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { RootState } from "store";
@@ -94,7 +94,7 @@ export default function Character() {
             { label: t('character.category'), value: character.category },
             { label: t('character.portrayed'), value: character.portrayed },
             { label: t('character.occupation'), component: occupationJSX(character.occupation) },
-            { label: t('character.appearance'), value: character.appearance.join(', ') },
+            { label: t('character.appearance'), value: t('character.appears_in', { appearance: character.appearance.join(', ') }) },
           ]}
         />
       </div>
@@ -110,6 +110,7 @@ export default function Character() {
         </Card>
 
         {!showSpoiler && <ButtonLink
+          className="text-white"
           component="button"
           variant="body2"
           onClick={() => handleShowSpoiler(character.name)}
@@ -118,6 +119,7 @@ export default function Character() {
         </ButtonLink>}
 
         {showSpoiler && <ButtonLink
+          className="text-white"
           component="button"
           variant="body2"
           onClick={() => setShowSpoiler(false)}
@@ -145,6 +147,10 @@ export default function Character() {
               { label: t('character.episode'), value: death.episode },
             ]}
           >
+            <Divider />
+            <Typography variant="body1" color="inherit" className="flex-1 pt-12 text-center">
+              {t('character.last_words')}
+            </Typography>
             <Typography variant="h5" color="inherit" className="flex-1 py-12 font-medium italic text-center">
               {death.last_words}
             </Typography>
