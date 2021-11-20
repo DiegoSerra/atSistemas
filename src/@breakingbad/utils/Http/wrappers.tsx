@@ -17,7 +17,6 @@ export const injectInterceptor = (enqueueSnackbar: (message: SnackbarMessage, op
   Http.responseInterceptor(
     (res: AxiosResponse<any>) => res,
     async (err: any) => {
-      console.log('err', err, err?.response, err?.response.status)
       
       if (axios.isCancel(err)) {
         return Promise.reject()
