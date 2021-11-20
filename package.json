@@ -60,7 +60,11 @@
     "eject": "craco eject"
   },
   "jest": {
-    "resetMocks": false
+    "resetMocks": false,
+    "coverageReporters": [
+      "html",
+      "lcov"
+    ]
   },
   "eslintConfig": {
     "extends": [

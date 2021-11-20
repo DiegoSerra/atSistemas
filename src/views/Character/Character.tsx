@@ -91,7 +91,6 @@ export default function Character() {
           data={[
             { label: t('character.birthday'), value: character.birthday },
             { label: t('character.nickname'), value: character.nickname },
-            { label: t('character.category'), value: character.category },
             { label: t('character.portrayed'), value: character.portrayed },
             { label: t('character.occupation'), component: occupationJSX(character.occupation) },
             { label: t('character.appearance'), value: t('character.appears_in', { appearance: character.appearance.join(', ') }) },
