@@ -14,11 +14,13 @@ export type CharacterContext = {
 	death?: DeathType
 }
 
+const initialState: CharacterContext = {
+	value: null
+}
+
 const characterSlice = createSlice({
 	name: 'character',
-	initialState: {
-		value: null
-	},
+	initialState,
 	reducers: {
 		resetCharacter: () => ({ value: null })
 	},

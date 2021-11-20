@@ -10,6 +10,7 @@ import {
   useSelector as ReduxUseSelector,
   useDispatch as ReduxUseDispatch,
   Provider as ReduxProvider,
+  TypedUseSelectorHook
 } from 'react-redux';
 import store from 'store';
 
@@ -21,7 +22,7 @@ export const combineReducers = RTKCombineReducers;
 
 export const configureStore = RTKConfigureStore;
 
-export const useSelector = ReduxUseSelector;
+export const useSelector: TypedUseSelectorHook<RootState> = ReduxUseSelector;
 
 export type RootState = ReturnType<typeof store.getState>;
 

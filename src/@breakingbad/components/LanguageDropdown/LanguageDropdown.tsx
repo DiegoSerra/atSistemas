@@ -7,10 +7,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import React, { useState } from 'react';
-import { RootState } from 'store';
 
 const LanguageDropdown = () => {
-	const currentLanguageId = useSelector<RootState>(({ language }) => language.settings.language) as Languages;
+	const currentLanguageId = useSelector(({ language }) => language.settings.language);
 
 	const [menu, setMenu] = useState<Element | null>(null);
 
