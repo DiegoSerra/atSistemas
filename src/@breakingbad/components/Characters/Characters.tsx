@@ -15,7 +15,7 @@ const Characters = () => {
 
   useEffect(() => {
 		if (searchText) {
-			setData(BreakingBadUtils.filterArrayByString(characters, searchText));
+			setData(characters.filter((character => BreakingBadUtils.searchInString(character.name, searchText))));
 		} else {
 			setData(characters);
 		}
