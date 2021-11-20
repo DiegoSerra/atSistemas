@@ -19,7 +19,6 @@ export const injectInterceptor = (enqueueSnackbar: (message: SnackbarMessage, op
     async (err: any) => {
       
       if (axios.isCancel(err)) {
-        console.log('cancel', err)
         return Promise.reject()
       };
 
@@ -27,6 +26,7 @@ export const injectInterceptor = (enqueueSnackbar: (message: SnackbarMessage, op
         switch (err.response.status) {
           case (400):
           case (500):
+          case (504):
             enqueueSnackbar(t(`error.${err.response.status}`), snackbarOptions);
             return Promise.reject(err);
           default:

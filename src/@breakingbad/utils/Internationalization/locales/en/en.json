@@ -27,7 +27,8 @@
     "en": "English"
   },
   "error": {
-    "400": "Petición mala",
-    "500": "Error interno del servidor"
+    "400": "Bad Request",
+    "500": "Internal server error",
+    "504": "Server down, try again later"
   }
 }

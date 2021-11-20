@@ -147,7 +147,7 @@ export const getDeath = createAsyncThunk('character/getDeath',
   async (name: string): Promise<DeathType | undefined> => await getDeathByAuthor(name));
 ```
 
-*Note: **getCharacter** could have been used by calling **charactersSlice** based on the id, since in this breakingbad api, the call to /api/characters returns the same information as /api/characters/{id}*.
+> **_NOTE:_**   **getCharacter** could have been used by calling **charactersSlice** based on the id, since in this breakingbad api, the call to /api/characters returns the same information as /api/characters/{id}.
 
 ```ts
 const charactersAdapter = createEntityAdapter({
@@ -216,6 +216,40 @@ export const changeLanguage = (lng: Languages) => {
   })
 };
 ```
+
+# Http interceptor
+
+To manage the different responses to Http calls, a wrapper has been created which, depending on the error status returned by the call response, informs the user of the error on the screen.
+
+```js
+export const injectInterceptor = (enqueueSnackbar: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey) => {
+  Http.responseInterceptor(
+    (res: AxiosResponse<any>) => res,
+    async (err: any) => {
+      
+      if (axios.isCancel(err)) {
+        return Promise.reject()
+      };
+
+      try {
+        switch (err.response.status) {
+          case (400):
+          case (500):
+          case (504):
+            enqueueSnackbar(t(`error.${err.response.status}`), snackbarOptions);
+            return Promise.reject(err);
+          default:
+            break;
+        }
+      } catch (e) {
+        enqueueSnackbar(t(`error.400`), snackbarOptions);
+      }
+    }
+  );
+
+}
+```
+> **_NOTE:_**  This interceptor includes the most common error states, as these are the ones that the breaking bad api would return
 
 # Testing
 
