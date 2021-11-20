@@ -23,7 +23,9 @@ For a full demo this application is hosted by [https://nervous-fermat-3644a3.net
   * [SettingSlice](#settingslice)
 - [Hooks](#hooks)
 - [Internationalization](#internationalization)
+- [Http interceptor](#http-interceptor)
 - [Testing](#testing)
+- [Things to consider](#things-to-consider)
 
 # Technologies
 
