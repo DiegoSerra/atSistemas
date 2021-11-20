@@ -5,7 +5,7 @@ import { QuoteType } from "@breakingbad/types/Quote.type";
 
 export async function getAllCharacters(): Promise<CharacterType[]> {
   const result = await Http.get(`/characters`);
-  return result?.data;
+  return result?.data || [];
 }
 
 export async function getCharacterById(id: number): Promise<CharacterType> {

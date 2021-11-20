@@ -244,7 +244,7 @@ export const injectInterceptor = (enqueueSnackbar: (message: SnackbarMessage, op
             break;
         }
       } catch (e) {
-        enqueueSnackbar(t(`error.400`), snackbarOptions);
+        enqueueSnackbar(t(`error.504`), snackbarOptions);
       }
     }
   );
