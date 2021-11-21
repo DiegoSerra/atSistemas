@@ -7,6 +7,7 @@ export interface CharacterType {
   status: string,
   nickname: string,
   appearance: number[],
+  better_call_saul_appearance: number[],
   portrayed: string,
   category: string[]
 }

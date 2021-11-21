@@ -30,7 +30,29 @@ export default function Character() {
         </div>
       ))}
       </>
-    )
+    );
+  }
+
+  const appearanceJSX = (appearance: number[], saul_appearance: number[]) => {
+    return (
+      <>
+        {!!appearance.length && <Typography>{t('character.appears_in_bb', { appearance: appearance.join(', ') }) }</Typography>}
+        {!!saul_appearance.length && <Typography>{t('character.appears_in_bcs', { appearance: saul_appearance.join(', ') }) }</Typography>}
+      </>
+    );
+  }
+
+  const statusJsx = (status: string) => {
+    return (
+      <div className="flex items-center">
+        <Typography>{status}</Typography>
+        <Tooltip title={status}>
+          <Icon className="text-16 mx-4" color="action">
+            {getStatusIcon(status)}
+          </Icon>
+        </Tooltip>
+      </div>
+    );
   }
 
   const handleShowSpoiler = async (author: string) => {
@@ -92,7 +114,8 @@ export default function Character() {
             { label: t('character.nickname'), value: character.nickname },
             { label: t('character.portrayed'), value: character.portrayed },
             { label: t('character.occupation'), component: occupationJSX(character.occupation) },
-            { label: t('character.appearance'), value: t('character.appears_in', { appearance: character.appearance.join(', ') }) },
+            { label: t('character.category'), value: character.category },
+            { label: t('character.appearance'), component: appearanceJSX(character.appearance, character.better_call_saul_appearance) },
           ]}
         />
       </div>
@@ -128,17 +151,7 @@ export default function Character() {
         {showSpoiler && (death ? 
           <CardSection
             data={[
-              { 
-                label: t('character.status'), 
-                component: <div className="flex items-center">
-                  <Typography>{character.status}</Typography>
-                  <Tooltip title={character.status}>
-                    <Icon className="text-16 mx-4" color="action">
-                      {getStatusIcon(character.status)}
-                    </Icon>
-                  </Tooltip>
-                </div> 
-              },
+              { label: t('character.status'), component: statusJsx(character.status) },
               { label: t('character.cause'), value: death.cause },
               { label: t('character.responsible'), value: death.responsible },
               { label: t('character.season'), value: death.season },

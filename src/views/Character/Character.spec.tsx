@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { Http } from '@breakingbad/services/Http';
 import { cleanup } from '@testing-library/react';
 
-const mockResponse = { name: 'Test', occupation: [], appearance: [] };
+const mockResponse = { name: 'Test', occupation: [], appearance: [], better_call_saul_appearance: [] };
 let historyReplaceCalled = false;
 
 jest.mock('react-router-dom', () => ({
